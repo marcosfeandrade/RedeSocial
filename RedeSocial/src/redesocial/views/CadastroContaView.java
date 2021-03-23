@@ -16,6 +16,9 @@ public class CadastroContaView {
     public void cadastrarConta() {
         System.out.println("Nome de usuário: ");
         String nomeUsuario = in.nextLine();
+        if(nomeUsuario == null){
+            nomeUsuario = "convidado";
+        }
         System.out.println("Login:");
         String login = in.nextLine();
         System.out.println("Senha:");
