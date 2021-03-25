@@ -1,11 +1,12 @@
 
 package redesocial.controllers;
 
-import redesocial.models.Conta;
+import redesocial.models.*;
 
 public class GerenciamentoConta {
 
     private Conta[] contas;
+    private Perfil[] perfis;
     private int qtd;
 
     public GerenciamentoConta() {
@@ -21,11 +22,30 @@ public class GerenciamentoConta {
             System.out.println("Login já utilizado!");
         }
     }
+    
+    public void cadastrarPerfil (String nomePerfil, String local, int idade, String fone) {
+        if(buscarNomePerfil(nomePerfil) == null) {
+            perfis[qtd] = new Perfil(nomePerfil, local, fone, idade);
+            qtd++;
+        }
+        else {
+            System.out.println("Nome de Usuário já está sendo ultilizado!");
+        }
+    }
 
     public Conta buscarLogin(String login) {
         for (int i = 0; i < qtd; i++) {
             if (contas[i].getLogin().compareTo(login) == 0) {
                 return contas[i];
+            }
+        }
+        return null;
+    }
+
+    public Perfil buscarNomePerfil(String nomePerfil) {
+        for (int i = 0; i < qtd; i++) {
+            if (perfis[i].getNome().compareTo(nomePerfil) == 0) {
+                return perfis[i];
             }
         }
         return null;
