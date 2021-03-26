@@ -14,6 +14,10 @@ public class Perfil implements Comparable <Perfil> {
         this.idade = idade;
         this.fone = fone;
     }
+    //COnstrutor 2
+    public Perfil (String nomePerfil) {
+        this.nomePerfil = nomePerfil;
+    }
     //metodos set e get
     public void setNome (String nomePerfil) {
         this.nomePerfil = nomePerfil;
