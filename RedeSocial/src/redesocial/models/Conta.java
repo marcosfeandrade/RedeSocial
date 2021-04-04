@@ -39,7 +39,7 @@ public class Conta implements Comparable<Conta> {
 
     public Perfil getPerfil() {
         return perfil;
-    }
+        }
 
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;

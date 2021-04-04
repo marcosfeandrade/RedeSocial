@@ -1,4 +1,3 @@
-
 package redesocial.controllers;
 
 import redesocial.models.*;
@@ -6,7 +5,6 @@ import redesocial.models.*;
 public class GerenciamentoConta {
 
     private Conta[] contas;
-    private Perfil[] perfis;
     private int qtd;
 
     public GerenciamentoConta() {
@@ -15,42 +13,54 @@ public class GerenciamentoConta {
     }
 
     public void cadastrar(String login, String senha, String nomeUsuario) {
-        if (buscarLogin(login) == null) { //login não utilizado
+        if (buscarLogin(login) == -1) { //login não utilizado
             contas[qtd] = new Conta(login, senha, nomeUsuario); //cadastro
             ++qtd;
         } else {
             System.out.println("Login já utilizado!");
         }
     }
-    
-    public void cadastrarPerfil (String nomePerfil, String local, int idade, String fone) {
-        if(buscarNomePerfil(nomePerfil) == null) {
-            perfis[qtd] = new Perfil(nomePerfil, local, fone, idade);
-            qtd++;
-        }
-        else {
-            System.out.println("Nome de Usuário já está sendo ultilizado!");
-        }
-    }
 
-    public Conta buscarLogin(String login) {
+    public int buscarLogin(String login) {
         for (int i = 0; i < qtd; i++) {
             if (contas[i].getLogin().compareTo(login) == 0) {
-                return contas[i];
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 
-    public Perfil buscarNomePerfil(String nomePerfil) {
+    public int buscarSenha(String senha) {
         for (int i = 0; i < qtd; i++) {
-            if (perfis[i].getNome().compareTo(nomePerfil) == 0) {
-                return perfis[i];
+            if (contas[i].getSenha().compareTo(senha) == 0) {
+                return i;
             }
         }
-        return null;
+        return -1;
     }
-    
+
+    public Conta logar(String login, String senha) {
+        int buscarLogin = buscarLogin(login);
+        int buscarSenha = buscarSenha(senha);
+        if (buscarLogin == -1) {
+            System.out.println("Login inexistente.");
+            return null;
+        } else if (buscarSenha == -1) {
+            System.out.println("Senha inexistente.");
+            return null;
+        } else {
+            if (buscarLogin != buscarSenha) {
+                System.out.println("Login ou senha inválido.");
+                return null;
+            } else {
+                System.out.println("Usuário "
+                        + contas[buscarLogin].getNomeUsuario()
+                        + " logado com sucesso!");
+            }
+        }
+        return contas[buscarLogin];
+    }
+
     /*public void alterarDados(Conta c){
         
     }
@@ -67,4 +77,4 @@ public class GerenciamentoConta {
         }
         return null;
     }*/
-    }
+}
