@@ -4,13 +4,12 @@ public class Conta implements Comparable<Conta> {
 
     private String login;
     private String senha;
-    private String nomeUsuario;
     private Perfil perfil;
     
-    public Conta(String login, String senha, String nomeUsuario) {
+    public Conta(String login, String senha, Perfil perfil) {
         this.login = login;
         this.senha = senha;
-        this.nomeUsuario = nomeUsuario;
+        this.perfil = perfil;
     }
 
     public String getLogin() {
@@ -27,14 +26,6 @@ public class Conta implements Comparable<Conta> {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getNomeUsuario() {
-        return nomeUsuario;
-    }
-
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
     }
 
     public Perfil getPerfil() {

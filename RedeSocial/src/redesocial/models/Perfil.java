@@ -1,4 +1,3 @@
-
 package redesocial.models;
 
 import java.util.ArrayList;
@@ -11,8 +10,8 @@ public class Perfil implements Comparable <Perfil> {
     private String fone;
     private int idade;
     private ArrayList<Recado> recados;
-    private ArrayList<String> convites;
-    private ArrayList<String> amigos;
+    private ArrayList<Perfil> convites;
+    private ArrayList<Perfil> amigos;
 
     //CONSTRUTOR
     public Perfil (String nomePerfil, String cidade, String fone, int idade) {
@@ -21,8 +20,8 @@ public class Perfil implements Comparable <Perfil> {
         this.idade = idade;
         this.fone = fone;
         this.recados = new ArrayList<Recado>();
-        this.convites = new ArrayList<String>();
-        this.amigos = new ArrayList<String>();
+        this.convites = new ArrayList<Perfil>();
+        this.amigos = new ArrayList<Perfil>();
     }
     //COnstrutor 2
     public Perfil (String nomePerfil) {
@@ -73,17 +72,19 @@ public class Perfil implements Comparable <Perfil> {
         return this.recados;
     }
 
-    public void enviarConvite(String solicitante) {
+    public void enviarConvite(Perfil solicitante) {
         this.convites.add(solicitante);
+    }
+
+    public ArrayList<Perfil> getConvites(){
+        return this.convites;
     }
 
     public void aceitarConvite(Perfil perfil) {
         boolean achouConvite = false;
         int index = 0;
-        String novoAmigo = perfil.getNome();
-
         for (int i=0; i < this.convites.size(); i++){
-            if (this.convites.get(i) == novoAmigo) {
+            if (this.convites.get(i).getNome().equals(perfil.getNome())) {
                 achouConvite = true;
                 index = i;
                 break;
@@ -92,8 +93,8 @@ public class Perfil implements Comparable <Perfil> {
 
         if (achouConvite) {
             this.convites.remove(index);
-            this.amigos.add(novoAmigo);
-            perfil.amigos.add(this.nomePerfil);
+            this.amigos.add(perfil);
+            perfil.amigos.add(this);
         }
     }
 }
