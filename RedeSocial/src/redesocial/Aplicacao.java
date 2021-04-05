@@ -11,6 +11,8 @@ public class Aplicacao {
         System.out.printf("Bem vindo %s\n", conta.getNomeUsuario());
         boolean sair = false;
         Perfil perfil = conta.getPerfil();
+        String usuario = "";
+        String senha = "";
 
         do {
             System.out.println("1 - Adicionar Amigos");
@@ -22,9 +24,9 @@ public class Aplicacao {
             switch(in.nextInt()){
                 case 1:
                     System.out.println("Qual o nome do usuario que você quer adicionar?");
-                    System usuario = in.next();
+                    usuario = in.next();
 
-                    Conta conta gerenciamentoConta.getConta(usuario);
+                    Conta conta = gerenciamentoConta.getConta(usuario);
                     if (conta){
                         Perfil amigo = conta.getPerfil();
                         amigo.enviarConvite(amigo.getLogin());   
@@ -38,7 +40,7 @@ public class Aplicacao {
                     System.out.println("Qual convite você quer aceitar?");
                     for (int i=0; convites.sizes(); i++) {
                         System.out.printf("%d - %s\n", i+1, convites.get(i));
-                        String aceitar = in.next();
+                        int aceitar = in.nextInt();
                         perfil.aceitarConvite(convites.get(aceitar-1));
                     }
                     break;
@@ -50,14 +52,14 @@ public class Aplicacao {
                     break;
                 case 4:
                     System.out.println("Qual o nome do usuario que você quer enviar a mensagem?");
-                    System usuario = in.next();
+                    usuario = in.next();
                 
-                    Conta conta gerenciamentoConta.getConta(usuario);
+                    Conta conta = gerenciamentoConta.getConta(usuario);
                     if (conta){
                         Perfil amigo = conta.getPerfil();
 
                         System.out.println("Qual mensagem você quer enviar?");
-                        System msg = in.next();
+                        String msg = in.next();
 
                         amigo.enviarRecado(msg, perfil.getNome());
                     } else {
@@ -75,6 +77,8 @@ public class Aplicacao {
         GerenciamentoConta gerenciamentoConta = new GerenciamentoConta();
         boolean sair = false;
         Conta conta = null;
+        String login = "";
+        String senha = "";
 
         do {
             System.out.println("Bem vindo!");
@@ -87,18 +91,18 @@ public class Aplicacao {
             switch(in.nextInt()) {
                 case 1:
                     System.out.println("Digite o login:");
-                    String login = in.next();
+                    login = in.next();
                     System.out.println("Digite a senha:");
-                    String senha = in.next();
+                    senha = in.next();
                     System.out.println("Digite o nome do usuario:");
                     String usuario = in.next();
                     gerenciamentoConta.cadastrar(login, senha, usuario);
                     break;
                 case 2:
                     System.out.println("Digite o login:");
-                    String login = in.next();
+                    login = in.next();
                     System.out.println("Digite a senha:");
-                    String senha = in.next();
+                    senha = in.next();
                     conta = gerenciamentoConta.logar(login, senha);
                     menuLogado(gerenciamentoConta, conta, in);
                     break;
