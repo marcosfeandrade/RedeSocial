@@ -23,17 +23,45 @@ public class Aplicacao {
                 case 1:
                     System.out.println("Qual o nome do usuario que você quer adicionar?");
                     System usuario = in.next();
-                    Perfil amigo = gerenciamentoConta.getConta(usuario).getPerfil();
-                    amigo.enviarConvite(conta.getLogin());
+
+                    Conta conta gerenciamentoConta.getConta(usuario);
+                    if (conta){
+                        Perfil amigo = conta.getPerfil();
+                        amigo.enviarConvite(amigo.getLogin());   
+                    } else {
+                        System.out.println("Usuario não encontrado");
+                    }
                     break;
                 case 2:
                     ArrayList<String> convites = perfil.getConvites();
 
                     System.out.println("Qual convite você quer aceitar?");
-                    for (int i = 0; convites.sizes(); i++) {
+                    for (int i=0; convites.sizes(); i++) {
                         System.out.printf("%d - %s\n", i+1, convites.get(i));
                         String aceitar = in.next();
                         perfil.aceitarConvite(convites.get(aceitar-1));
+                    }
+                    break;
+                case 3:
+                    ArrayList<Recado> recados = perfil.getRecados();
+                    for (int i=0; i < recados.sizes(); i++){
+                        System.out.println(recados.get(i));
+                    }
+                    break;
+                case 4:
+                    System.out.println("Qual o nome do usuario que você quer enviar a mensagem?");
+                    System usuario = in.next();
+                
+                    Conta conta gerenciamentoConta.getConta(usuario);
+                    if (conta){
+                        Perfil amigo = conta.getPerfil();
+
+                        System.out.println("Qual mensagem você quer enviar?");
+                        System msg = in.next();
+
+                        amigo.enviarRecado(msg, perfil.getNome());
+                    } else {
+                        System.out.println("Usuario não encontrado");
                     }
                     break;
                 case 5:
