@@ -77,6 +77,10 @@ public class Perfil implements Comparable <Perfil> {
         this.convites.add(solicitante);
     }
 
+    public ArrayList<String> getConvites(){
+        return this.convites;
+    }
+
     public void aceitarConvite(Perfil perfil) {
         boolean achouConvite = false;
         int index = 0;

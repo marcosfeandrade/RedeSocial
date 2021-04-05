@@ -12,6 +12,15 @@ public class GerenciamentoConta {
         this.qtd = 0;
     }
 
+    public Conta getConta(String login){
+        int index = buscarLogin(login);
+        if (index == -1) {
+            return null;
+        } else {
+            return this.contas[index];
+        }
+    }
+
     public void cadastrar(String login, String senha, String nomeUsuario) {
         if (buscarLogin(login) == -1) { //login não utilizado
             contas[qtd] = new Conta(login, senha, nomeUsuario); //cadastro
