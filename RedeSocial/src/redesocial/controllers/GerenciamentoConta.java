@@ -60,21 +60,4 @@ public class GerenciamentoConta {
         }
         return contas[buscarLogin];
     }
-
-    /*public void alterarDados(Conta c){
-        
-    }
-    
-    public void excluir(String login){
-        
-    }
-    
-    public Conta buscarNomeUsuario(String nomeUsuario) {
-        for (int i = 0; i < qtd; i++) {
-            if (contas[i].getNomeUsuario().compareTo(nomeUsuario) == 0) {
-                return contas[i];
-            }
-        }
-        return null;
-    }*/
 }
