@@ -5,11 +5,12 @@ import java.util.Scanner;
 import redesocial.controllers.GerenciamentoConta;
 import redesocial.models.Conta;
 import redesocial.models.Perfil;
+
 import redesocial.models.Recado;
 import redesocial.repository.ContaDao;
-import redesocial.views.CadastroContaView;
 
 public class Aplicacao {
+
 
     public static void main(String[] args) {
         GerenciamentoConta gerenciamentoConta = new GerenciamentoConta();
