@@ -40,4 +40,9 @@ public class Conta implements Comparable<Conta> {
     public int compareTo(Conta c) {
         return this.login.compareTo(c.login);
     }
+
+    @Override
+    public String toString() {
+        return "Conta{" + "login=" + login + ", senha=" + senha + ", perfil=" + perfil + "}";
+    }
 }

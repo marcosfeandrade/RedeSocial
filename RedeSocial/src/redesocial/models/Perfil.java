@@ -26,6 +26,9 @@ public class Perfil implements Comparable <Perfil> {
     //COnstrutor 2
     public Perfil (String nomePerfil) {
         this.nomePerfil = nomePerfil;
+        this.recados = new ArrayList<Recado>();
+        this.convites = new ArrayList<Perfil>();
+        this.amigos = new ArrayList<Perfil>();
     }
     //metodos set e get
     public void setNome (String nomePerfil) {
@@ -53,10 +56,7 @@ public class Perfil implements Comparable <Perfil> {
         return fone;
     }
     public String toString() {
-        return "Nome: "+this.nomePerfil+
-        "\nIdade: "+this.idade+
-        "\nCidade: "+this.cidade+
-        "\nFone: "+this.fone;
+        return "Nome: " + this.nomePerfil;
     }
     @Override
     public int compareTo (Perfil p) {
@@ -72,7 +72,7 @@ public class Perfil implements Comparable <Perfil> {
         return this.recados;
     }
 
-    public void enviarConvite(Perfil solicitante) {
+    public void addConvite(Perfil solicitante) {
         this.convites.add(solicitante);
     }
 
@@ -97,4 +97,5 @@ public class Perfil implements Comparable <Perfil> {
             perfil.amigos.add(this);
         }
     }
+    
 }

@@ -1,5 +1,6 @@
 package redesocial.repository;
 
+
 import redesocial.models.Conta;
 import redesocial.models.Perfil;
 
@@ -24,11 +25,11 @@ public class ContaDao {
     public Conta[] getContas() {
         return contas;
     }
-    
+
     public void cadastrar(Conta conta) {
-            Conta[] contas = ContaDao.getInstance().getContas();
-            contas[qtd] = conta;
-            ++qtd;
+        Conta[] contas = ContaDao.getInstance().getContas();
+        contas[qtd] = conta;
+        ++qtd;
     }
 
     public Conta buscarLogin(String login) {
@@ -49,5 +50,9 @@ public class ContaDao {
             }
         }
         return null;
+    }
+
+    public Conta[] listarUsuarios() {
+        return contas;
     }
 }
