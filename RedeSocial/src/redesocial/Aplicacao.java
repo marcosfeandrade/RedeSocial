@@ -69,7 +69,9 @@ public class Aplicacao {
             System.out.println("3 - Listar recados");
             System.out.println("4 - Enviar recado");
             System.out.println("5 - Listar usuarios");
-            System.out.println("6 - Deslogar");
+            System.out.println("6 - Aceitar recado no mural");
+            System.out.println("7 - Ver mural de outro usuario");
+            System.out.println("8 - Deslogar");
 
             switch (in.nextInt()) {
                 case 1:
@@ -105,12 +107,24 @@ public class Aplicacao {
                     if(amigo == null){
                         System.out.println("Usuario inexistente.");
                     } else {
-                    Perfil perfilAmigo = amigo.getPerfil();
+                        Perfil perfilAmigo = amigo.getPerfil();
 
-                    System.out.println("Qual mensagem você quer enviar?");
-                    String msg = in.next();
+                        System.out.println("Qual mensagem você quer enviar?");
+                        String msg = in.next();
 
-                    perfilAmigo.enviarRecado(msg, perfil.getNome());
+                        System.out.println("Se sua menagem for secreta digite a senha, se não deixe em branco.");
+                        String senhaRecado = in.next();
+                        if (senhaRecado == ""){
+                            System.out.println("Você quer enviar esse recado no mural?\n1 - Sim\n 2 - Não");
+                            int mural = in.nextInt();
+                            if (mural == 1) {
+                                perfilAmigo.enviarRecadoMural(msg, perfil.getNome());
+                            } else {
+                                perfilAmigo.enviarRecado(msg, perfil.getNome());
+                            }
+                        } else {
+                            perfilAmigo.enviarRecado(msg, perfil.getNome(), senhaRecado);
+                        }
                     }
                     break;
                 case 5:
@@ -119,7 +133,40 @@ public class Aplicacao {
                     for (int i = 0; i < contaPrint.length; i++) {
                         System.out.println(contaPrint[i]);
                     }
+                    break;
                 case 6:
+                    ArrayList<Recado> muralAceitar = perfil.getRecadosMuralParaAceitar();
+                    System.out.println("Você quer aceitar todos os recados?\n1 - Sim\n2 - Não");
+                    int aceitartudo = in.nextInt();
+                    for (int i = 0; i < muralAceitar.size(); i++) {
+                        if (aceitartudo) {
+                            perfil.aceitarMural(i);
+                        } else {
+                            System.out.println("%d - %s", i+1, muralAceitar.get(i));
+                        }
+                    }
+                    if (!aceitarTudo){
+                        int indiceAceitar = in.nextInt();
+                        perfil.aceitarMural(i-1);
+                    }
+                    break;
+                case 7:
+                    System.out.println("Qual o login do usuario que você quer ver o mural?");
+                    login = in.next();
+                    Perfil perfilMural = conta.getPerfil(login);
+                    if (perfilMural) {
+                        ArralyList<Recado> exibirMural = perfilMural.getRecados();
+                        for (int i = 0; i < exibirMural.size(); i++) { 
+                            Recado rMural = exibirMural.get(i);
+                            if (rMural.exibirNoMural()){
+                                System.out.println(rMural);
+                            }
+                        }
+                    } else {
+                        System.out.println("Login invalido.");
+                    }
+                    break;
+                case 8:
                     sair = true;
                     break;
             }
