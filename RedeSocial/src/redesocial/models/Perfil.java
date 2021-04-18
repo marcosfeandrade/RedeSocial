@@ -125,7 +125,7 @@ public class Perfil implements Comparable <Perfil> {
         if(c) {
             v = false;
         }
-        return false;
+        return v;
     }
 
     public void aceitarConvite(Perfil perfil) {
