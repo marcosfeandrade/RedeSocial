@@ -10,6 +10,7 @@ public class Perfil implements Comparable <Perfil> {
     private String fone;
     private int idade;
     private ArrayList<Recado> recados;
+    private ArrayList<Recado> muralPendente;
     private ArrayList<Perfil> convites;
     private ArrayList<Perfil> amigos;
 
@@ -68,6 +69,20 @@ public class Perfil implements Comparable <Perfil> {
         recados.add(recado);
     }
 
+    public void enviarRecadoMural(String msg, string autor){
+        Recado recado = new Reacado(msg, autor, true);
+        muralPendentes.add(recado);
+    }
+
+    public ArrayList<Recado> getMuralPendente() {
+        return this.muralPendente;
+    }
+
+    public void aceitarMural(int i){
+        Recado recado = this.muralPendente.get(i);
+        this.recados.add(recado);
+    }
+
     public void enviarRecado(String msg, String autor, String senha){
         Recado recado = new Recado(msg, autor, senha);
         recados.add(recado);
@@ -77,6 +92,9 @@ public class Perfil implements Comparable <Perfil> {
         return this.recados;
     }
 
+    public ArrayList<Recado> getRecadosMuralParaAceitar() {
+        return this.muralPendente;
+    }
     public void addConvite(Perfil solicitante) {
         this.convites.add(solicitante);
     }

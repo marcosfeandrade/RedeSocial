@@ -6,6 +6,7 @@ public class Recado {
     private String autor;
     private String senha;
     private boolean secreta;
+    private boolean mural;
     
     public Recado(String mensagem, String autor) {
         this.mensagem = mensagem;
@@ -19,6 +20,12 @@ public class Recado {
         this.autor = autor;
         this.senha = senha;
         this.secreta = true;
+    }
+
+    public Recado(string mensagem, String autor, boolean mural){
+        this.mensagem = mensagem;
+        this.autor = autor;
+        this.mural = mural;
     }
 
     public String getMensagem() {
@@ -51,5 +58,9 @@ public class Recado {
 
     public boolean abrirMensagemSecreta(String senha) {
         return (this.senha == senha);
+    }
+
+    public boolean exibirNoMural(){
+        return this.mural;
     }
 }
