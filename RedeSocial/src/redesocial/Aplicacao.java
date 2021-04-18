@@ -95,7 +95,19 @@ public class Aplicacao {
                 case 3:
                     ArrayList<Recado> recados = perfil.getRecados();
                     for (int i = 0; i < recados.size(); i++) {
-                        System.out.println(recados.get(i));
+                        boolean exibirRecado = true;
+                        Recado recado = recados.get(i); 
+                        if (recado.ehSecreta()){
+                            System.out.Println("Você tem um recado secreto de %s, digite a senha para exibir o recado.");
+                            String senhaRecado = in.next();
+                            if (!recado.abrirMensagemSecreta(senha)){
+                                System.out.println("Senha invalida");
+                            }
+                        }
+
+                        if (exibirRecado){
+                            System.out.println(recado);
+                        }
                     }
                     break;
                 case 4:
@@ -105,12 +117,18 @@ public class Aplicacao {
                     if(amigo == null){
                         System.out.println("Usuario inexistente.");
                     } else {
-                    Perfil perfilAmigo = amigo.getPerfil();
+                        Perfil perfilAmigo = amigo.getPerfil();
 
-                    System.out.println("Qual mensagem você quer enviar?");
-                    String msg = in.next();
+                        System.out.println("Qual mensagem você quer enviar?");
+                        String msg = in.next();
 
-                    perfilAmigo.enviarRecado(msg, perfil.getNome());
+                        System.out.println("Se sua menagem for secreta digite a senha, se não deixe em branco.");
+                        String senhaRecado = in.next();
+                        if (senhaRecado == ""){
+                            perfilAmigo.enviarRecado(msg, perfil.getNome());
+                        } else {
+                            perfilAmigo.enviarRecado(msg, perfil.getNome(), senhaRecado);
+                        }
                     }
                     break;
                 case 5:

@@ -68,6 +68,11 @@ public class Perfil implements Comparable <Perfil> {
         recados.add(recado);
     }
 
+    public void enviarRecado(String msg, String autor, String senha){
+        Recado recado = new Recado(msg, autor, senha);
+        recados.add(recado);
+    }
+
     public ArrayList<Recado> getRecados() {
         return this.recados;
     }
