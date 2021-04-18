@@ -1,18 +1,18 @@
 package redesocial.repository;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import redesocial.models.Conta;
 import redesocial.models.Perfil;
 
 public class ContaDao {
 
     private static ContaDao contaDao;
-    private Conta contas[];
-    private static int qtd;
+    private List<Conta> contas;
 
     private ContaDao() {
-        this.qtd = 0;
-        this.contas = new Conta[100];
+        this.contas = new ArrayList<>();
     }
 
     public static ContaDao getInstance() {
@@ -22,37 +22,42 @@ public class ContaDao {
         return contaDao;
     }
 
-    public Conta[] getContas() {
+    public List<Conta> getContas() {
         return contas;
     }
 
     public void cadastrar(Conta conta) {
-        Conta[] contas = ContaDao.getInstance().getContas();
-        contas[qtd] = conta;
-        ++qtd;
+        List<Conta> contas = ContaDao.getInstance().getContas();
+        contas.add(conta);
     }
 
     public Conta buscarLogin(String login) {
-        for (int i = 0; i < qtd; i++) {
-            if (ContaDao.getInstance().getContas()[i].getLogin().compareTo(login)
-                    == 0) {
-                return contas[i];
+        for(Conta c: contas){
+            if (c.getLogin().compareTo(login) == 0) {
+                return c;
             }
         }
         return null;
     }
 
     public Conta buscarSenha(String senha) {
-        for (int i = 0; i < qtd; i++) {
-            if (ContaDao.getInstance().getContas()[i].getSenha().compareTo(senha)
-                    == 0) {
-                return contas[i];
+        for(Conta c: contas){
+            if (c.getSenha().compareTo(senha) == 0) {
+                return c;
             }
         }
         return null;
     }
 
-    public Conta[] listarUsuarios() {
+    public List<Conta> listarUsuarios() {
         return contas;
     }
+    
+    public void removerConta(Conta c){
+        this.contas.remove(c);
+    }
+    
+   public int count(){
+       return contas.size();
+   } 
 }
