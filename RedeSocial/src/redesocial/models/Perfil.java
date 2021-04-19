@@ -114,7 +114,7 @@ public class Perfil implements Comparable <Perfil> {
         return this.matchs;
     }
 
-    public boolean vereficaMatch (Perfil p) {
+    public boolean verificaMatch (Perfil p) {
         boolean v = false;
         for(int i = 0; i < this.matchs.size(); i++) {
             if(this.matchs.get(i).getNome().equals(p.getNome()) == true) {
@@ -122,7 +122,7 @@ public class Perfil implements Comparable <Perfil> {
                 break;
             }
         }
-        if(c) {
+        if(v) {
             v = false;
         }
         return v;
