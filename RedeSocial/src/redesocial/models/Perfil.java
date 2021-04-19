@@ -95,6 +95,7 @@ public class Perfil implements Comparable <Perfil> {
     public ArrayList<Recado> getRecadosMuralParaAceitar() {
         return this.muralPendente;
     }
+    
     public void addConvite(Perfil solicitante) {
         this.convites.add(solicitante);
     }
