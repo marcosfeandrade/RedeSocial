@@ -107,7 +107,7 @@ public class Perfil implements Comparable <Perfil> {
     }
 
     public void addMatch(Perfil solicitante) {
-        this.metchs.add(solicitante);
+        this.matchs.add(solicitante);
     }
 
     public ArrayList<Perfil> getMatchs () {

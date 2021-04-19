@@ -187,7 +187,7 @@ public class Aplicacao {
                         System.out.println("Login não encontrado!");
                     }
                     else {
-                        m.getPerfil.addMatch(perfil);
+                        m.getPerfil().addMatch(perfil);
                     }
                     boolean deuMatch;
                     deuMatch = m.getPerfil().verificaMatch(perfil);
