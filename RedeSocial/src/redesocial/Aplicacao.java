@@ -159,8 +159,9 @@ public class Aplicacao {
                         }
                     }
                     if (!aceitarTudo){
+                        System.out.println("Quando recado você quer publicar no seu mural?");
                         int indiceAceitar = in.nextInt();
-                        perfil.aceitarMural(i-1);
+                        perfil.aceitarMural(indiceAceitar-1);
                     }
                     break;
                 case 7:

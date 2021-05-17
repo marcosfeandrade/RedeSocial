@@ -28,6 +28,12 @@ public class Recado {
         this.mural = mural;
     }
 
+    public Recado(string mensagem, String autor, boolean mural){
+        this.mensagem = mensagem;
+        this.autor = autor;
+        this.mural = mural;
+    }
+
     public String getMensagem() {
         if (!secreta) {
             return this.mensagem;
