@@ -25,6 +25,10 @@ public class GerenciamentoConta {
             return c;
         }
     }
+
+    public Conta getPerfil(String login) {
+        return ContaDao.getInstance().buscarLogin(login);
+    }
     
     public Conta[] listarContas() {
         return ContaDao.getInstance().getContas();
