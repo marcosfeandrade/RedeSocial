@@ -86,13 +86,17 @@ public class Aplicacao {
             System.out.println("2 - Aceitar solicitações de amizades");
             System.out.println("3 - Listar recados");
             System.out.println("4 - Enviar recado");
-            if (conta.getTipoContaEnum() == TipoContaEnum.ADMIN) {
-                System.out.println("5 - Listar informações dos usuarios");
-                System.out.println("6 - Excluir outras contas");
-                System.out.println("7 - Editar outras contas");
-            }
+            System.out.println("5 - Aceitar recado no mural");
+            System.out.println("6 - Ver mural de outro usuario");
+            System.out.println("7 - Adicionar um Match");
             System.out.println("0 - Deslogar");
-            int respMenu = in.nextInt();
+            if (conta.getTipoContaEnum() == TipoContaEnum.ADMIN) {
+                System.out.println("8 - Listar informações dos usuarios");
+                System.out.println("9 - Excluir outras contas");
+                System.out.println("10 - Editar outras contas");
+            }
+          
+          int respMenu = in.nextInt();
             switch (respMenu) {
                 case 1:
                     System.out.println("Qual o login do usuario que você quer adicionar?");
@@ -116,7 +120,20 @@ public class Aplicacao {
                 case 3:
                     ArrayList<Recado> recados = perfil.getRecados();
                     for (int i = 0; i < recados.size(); i++) {
-                        System.out.println(recados.get(i));
+                        boolean exibirRecado = true;
+                        Recado recado = recados.get(i); 
+                        if (recado.ehSecreta()){
+                            System.out.Printf("Você tem um recado secreto de %s, digite a senha para exibir o recado.\n", recado.getAutor());
+                            String senhaRecado = in.next();
+                            if (!recado.abrirMensagemSecreta(senha)){
+                                System.out.println("Senha invalida");
+                                exibirRecado = false;
+                            }
+                        }
+
+                        if (exibirRecado){
+                            System.out.println(recado);
+                        }
                     }
                     break;
                 case 4:
@@ -127,9 +144,23 @@ public class Aplicacao {
                         System.out.println("Usuario inexistente.");
                     } else {
                         Perfil perfilAmigo = amigo.getPerfil();
+
                         System.out.println("Qual mensagem você quer enviar?");
                         String msg = in.next();
-                        perfilAmigo.enviarRecado(msg, perfil.getNome());
+
+                        System.out.println("Se sua menagem for secreta digite a senha, se não deixe em branco.");
+                        String senhaRecado = in.next();
+                        if (senhaRecado == ""){
+                            System.out.println("Você quer enviar esse recado no mural?\n1 - Sim\n 2 - Não");
+                            int mural = in.nextInt();
+                            if (mural == 1) {
+                                perfilAmigo.enviarRecadoMural(msg, perfil.getNome());
+                            } else {
+                                perfilAmigo.enviarRecado(msg, perfil.getNome());
+                            }
+                        } else {
+                            perfilAmigo.enviarRecado(msg, perfil.getNome(), senhaRecado);
+                        }
                     }
                     break;
                 case 5:
@@ -144,7 +175,7 @@ public class Aplicacao {
                         System.out.println("Você não tem acesso a esta opção");
                     }
                     break;
-                case 6:
+                case 9:
                     if (conta.getTipoContaEnum() == TipoContaEnum.ADMIN) {
                         in.nextLine();
                         System.out.println("Login da conta a ser excluída: ");
@@ -159,7 +190,7 @@ public class Aplicacao {
                         System.out.println("Você não tem acesso a esta opção");
                     }
                     break;
-                case 7:
+                case 10:
                     if (conta.getTipoContaEnum() == TipoContaEnum.ADMIN) {
                         in.nextLine();
                         System.out.println("Login da conta a ser editada: ");
@@ -192,6 +223,55 @@ public class Aplicacao {
                         }
                     } else {
                         System.out.println("Você não tem acesso a esta opção");
+                    }
+                    break;
+                case 5:
+                    ArrayList<Recado> muralAceitar = perfil.getRecadosMuralParaAceitar();
+                    System.out.println("Você quer aceitar todos os recados?\n1 - Sim\n2 - Não");
+                    int aceitartudo = in.nextInt();
+                    for (int i = 0; i < muralAceitar.size(); i++) {
+                        if (aceitartudo) {
+                            perfil.aceitarMural(i);
+                        } else {
+                            System.out.println("%d - %s", i+1, muralAceitar.get(i));
+                        }
+                    }
+                    if (!aceitarTudo){
+                        System.out.println("Quando recado você quer publicar no seu mural?");
+                        int indiceAceitar = in.nextInt();
+                        perfil.aceitarMural(indiceAceitar-1);
+                    }
+                    break;
+                case 6:
+                    System.out.println("Qual o login do usuario que você quer ver o mural?");
+                    login = in.next();
+                    Perfil perfilMural = conta.getPerfil(login);
+                    if (perfilMural) {
+                        ArralyList<Recado> exibirMural = perfilMural.getRecados();
+                        for (int i = 0; i < exibirMural.size(); i++) { 
+                            Recado rMural = exibirMural.get(i);
+                            if (rMural.exibirNoMural()){
+                                System.out.println(rMural);
+                            }
+                        }
+                    } else {
+                        System.out.println("Login invalido.");
+                    }
+                    break;
+                case 7:
+                    System.out.print("Digite o login do usuário que você deseja dar um match:");
+                    String logU = in.next();
+                    Conta m = ContaDao.getInstance().buscarLogin(logU);
+                    if(m == null) {
+                        System.out.println("Login não encontrado!");
+                    }
+                    else {
+                        m.getPerfil().addMatch(perfil);
+                    }
+                    boolean deuMatch;
+                    deuMatch = m.getPerfil().verificaMatch(perfil);
+                    if(deuMatch == true) {
+                        System.out.println("MATCH com "+m.getPerfil());
                     }
                     break;
                 case 0:

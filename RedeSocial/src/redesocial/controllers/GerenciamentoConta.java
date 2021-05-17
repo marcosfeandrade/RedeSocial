@@ -28,7 +28,6 @@ public class GerenciamentoConta {
             return c;
         }
     }
-
     public Conta buscarLogin(String login) {
         return ContaDao.getInstance().buscarLogin(login);
     }
@@ -39,8 +38,6 @@ public class GerenciamentoConta {
             return false;
         }
         c.setAtivo(false);
-        /*ContaDao.getInstance().removerConta(c);*/
-        //código para REALMENTE remover conta
         return true;
     }
 
@@ -66,6 +63,6 @@ public class GerenciamentoConta {
     }
 
     public List<Conta> listarContas() {
-        return ContaDao.getInstance().getContas();
+        return ContaDao.getInstance().buscarLogin(login);
     }
 }
