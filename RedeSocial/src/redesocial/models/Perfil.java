@@ -71,7 +71,6 @@ public class Perfil implements Comparable <Perfil> {
         Recado recado = new Recado(msg, autor);
         recados.add(recado);
     }
-
     public void enviarRecadoMural(String msg, string autor){
         Recado recado = new Reacado(msg, autor, true);
         muralPendentes.add(recado);
@@ -85,7 +84,6 @@ public class Perfil implements Comparable <Perfil> {
         Recado recado = this.muralPendente.get(i);
         this.recados.add(recado);
     }
-
     public void enviarRecado(String msg, String autor, String senha){
         Recado recado = new Recado(msg, autor, senha);
         recados.add(recado);

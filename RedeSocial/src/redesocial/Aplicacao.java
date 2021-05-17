@@ -101,10 +101,11 @@ public class Aplicacao {
                         boolean exibirRecado = true;
                         Recado recado = recados.get(i); 
                         if (recado.ehSecreta()){
-                            System.out.Println("Você tem um recado secreto de %s, digite a senha para exibir o recado.");
+                            System.out.Printf("Você tem um recado secreto de %s, digite a senha para exibir o recado.\n", recado.getAutor());
                             String senhaRecado = in.next();
                             if (!recado.abrirMensagemSecreta(senha)){
                                 System.out.println("Senha invalida");
+                                exibirRecado = false;
                             }
                         }
 
