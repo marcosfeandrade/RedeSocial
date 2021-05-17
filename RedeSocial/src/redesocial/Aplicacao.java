@@ -71,7 +71,8 @@ public class Aplicacao {
             System.out.println("5 - Listar usuarios");
             System.out.println("6 - Aceitar recado no mural");
             System.out.println("7 - Ver mural de outro usuario");
-            System.out.println("8 - Deslogar");
+            System.out.println("8 - Adicionar um Match");
+            System.out.println("10 - Deslogar");
 
             switch (in.nextInt()) {
                 case 1:
@@ -97,7 +98,19 @@ public class Aplicacao {
                 case 3:
                     ArrayList<Recado> recados = perfil.getRecados();
                     for (int i = 0; i < recados.size(); i++) {
-                        System.out.println(recados.get(i));
+                        boolean exibirRecado = true;
+                        Recado recado = recados.get(i); 
+                        if (recado.ehSecreta()){
+                            System.out.Println("Você tem um recado secreto de %s, digite a senha para exibir o recado.");
+                            String senhaRecado = in.next();
+                            if (!recado.abrirMensagemSecreta(senha)){
+                                System.out.println("Senha invalida");
+                            }
+                        }
+
+                        if (exibirRecado){
+                            System.out.println(recado);
+                        }
                     }
                     break;
                 case 4:
@@ -168,6 +181,22 @@ public class Aplicacao {
                     }
                     break;
                 case 8:
+                    System.out.print("Digite o login do usuário que você deseja dar um match:");
+                    String logU = in.next();
+                    Conta m = ContaDao.getInstance().buscarLogin(logU);
+                    if(m == null) {
+                        System.out.println("Login não encontrado!");
+                    }
+                    else {
+                        m.getPerfil().addMatch(perfil);
+                    }
+                    boolean deuMatch;
+                    deuMatch = m.getPerfil().verificaMatch(perfil);
+                    if(deuMatch == true) {
+                        System.out.println("MATCH com "+m.getPerfil());
+                    }
+                    break;
+                case 10:
                     sair = true;
                     break;
             }

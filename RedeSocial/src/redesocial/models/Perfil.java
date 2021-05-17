@@ -13,6 +13,7 @@ public class Perfil implements Comparable <Perfil> {
     private ArrayList<Recado> muralPendente;
     private ArrayList<Perfil> convites;
     private ArrayList<Perfil> amigos;
+    private ArrayList<Perfil> matchs;
 
     //CONSTRUTOR
     public Perfil (String nomePerfil, String cidade, String fone, int idade) {
@@ -23,6 +24,7 @@ public class Perfil implements Comparable <Perfil> {
         this.recados = new ArrayList<Recado>();
         this.convites = new ArrayList<Perfil>();
         this.amigos = new ArrayList<Perfil>();
+        this.matchs = new ArrayList<Perfil>();
     }
     //COnstrutor 2
     public Perfil (String nomePerfil) {
@@ -30,6 +32,7 @@ public class Perfil implements Comparable <Perfil> {
         this.recados = new ArrayList<Recado>();
         this.convites = new ArrayList<Perfil>();
         this.amigos = new ArrayList<Perfil>();
+        this.matchs = new ArrayList<Perfil>();
     }
     //metodos set e get
     public void setNome (String nomePerfil) {
@@ -95,13 +98,34 @@ public class Perfil implements Comparable <Perfil> {
     public ArrayList<Recado> getRecadosMuralParaAceitar() {
         return this.muralPendente;
     }
-    
     public void addConvite(Perfil solicitante) {
         this.convites.add(solicitante);
     }
 
     public ArrayList<Perfil> getConvites(){
         return this.convites;
+    }
+
+    public void addMatch(Perfil solicitante) {
+        this.matchs.add(solicitante);
+    }
+
+    public ArrayList<Perfil> getMatchs () {
+        return this.matchs;
+    }
+
+    public boolean verificaMatch (Perfil p) {
+        boolean v = false;
+        for(int i = 0; i < this.matchs.size(); i++) {
+            if(this.matchs.get(i).getNome().equals(p.getNome()) == true) {
+                v = true;
+                break;
+            }
+        }
+        if(v) {
+            v = false;
+        }
+        return v;
     }
 
     public void aceitarConvite(Perfil perfil) {
