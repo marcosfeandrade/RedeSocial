@@ -1,4 +1,4 @@
-package redesocial.views;
+/*package redesocial.views;
 
 import java.util.Scanner;
 import redesocial.controllers.GerenciamentoConta;
@@ -25,4 +25,4 @@ public class CadastroContaView {
         String Senha = in.nextLine();
         gerenciamentoConta.cadastrar(login, Senha, nomeUsuario);
     }
-}
+}*/
