@@ -163,7 +163,7 @@ public class Aplicacao {
                         }
                     }
                     break;
-                case 5:
+                case 8:
                     if (conta.getTipoContaEnum() == TipoContaEnum.ADMIN) {
                         List<Conta> contaPrintInfo = gerenciamentoConta.
                                 listarContas();
