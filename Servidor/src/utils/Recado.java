@@ -1,7 +1,13 @@
-package redesocial.models;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package utils;
+import java.io.Serializable;
 
-public class Recado {
-
+public class Recado implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String mensagem;
     private String autor;
     private String senha;
@@ -22,13 +28,7 @@ public class Recado {
         this.secreta = true;
     }
 
-    public Recado(string mensagem, String autor, boolean mural){
-        this.mensagem = mensagem;
-        this.autor = autor;
-        this.mural = mural;
-    }
-
-    public Recado(string mensagem, String autor, boolean mural){
+    public Recado(String mensagem, String autor, boolean mural){
         this.mensagem = mensagem;
         this.autor = autor;
         this.mural = mural;
@@ -43,10 +43,10 @@ public class Recado {
     }
 
     public String getMensagem(String senha){
-        if(this.senha == senha) {
-            return this.mensagem;
-        } else {
+        if(!this.senha.equals(senha)) {
             return "";
+        } else {
+            return this.mensagem;
         }
     }
 
@@ -54,6 +54,11 @@ public class Recado {
         return this.autor;
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
     public String toString() {
         return "Mensagem: " + this.mensagem + "Enviada por: " + this.autor;
     }
@@ -63,7 +68,7 @@ public class Recado {
     }
 
     public boolean abrirMensagemSecreta(String senha) {
-        return (this.senha == senha);
+        return (this.senha.equals(senha));
     }
 
     public boolean exibirNoMural(){

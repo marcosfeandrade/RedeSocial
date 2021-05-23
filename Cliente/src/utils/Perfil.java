@@ -1,32 +1,22 @@
-package redesocial.models;
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package utils;
+import java.io.Serializable;
 import java.util.ArrayList;
-import redesocial.models.Recado;
 
-public class Perfil implements Comparable <Perfil> {
+public class Perfil implements Comparable <Perfil>, Serializable {
+    private static final long serialVersionUID = 1L;
     //atributos
-    private String nomePerfil; 
-    private String cidade;
-    private String fone;
-    private int idade;
+    private String nomePerfil;
     private ArrayList<Recado> recados;
     private ArrayList<Recado> muralPendente;
     private ArrayList<Perfil> convites;
     private ArrayList<Perfil> amigos;
     private ArrayList<Perfil> matchs;
-
-    //CONSTRUTOR
-    public Perfil (String nomePerfil, String cidade, String fone, int idade) {
-        this.nomePerfil = nomePerfil;
-        this.cidade = cidade;
-        this.idade = idade;
-        this.fone = fone;
-        this.recados = new ArrayList<Recado>();
-        this.convites = new ArrayList<Perfil>();
-        this.amigos = new ArrayList<Perfil>();
-        this.matchs = new ArrayList<Perfil>();
-    }
-    //COnstrutor 2
+    
     public Perfil (String nomePerfil) {
         this.nomePerfil = nomePerfil;
         this.recados = new ArrayList<Recado>();
@@ -41,24 +31,6 @@ public class Perfil implements Comparable <Perfil> {
     public String getNome () {
         return nomePerfil;
     }
-    public void setCidade (String cidade) {
-        this.cidade = cidade;
-    }
-    public String getCidade () {
-        return cidade;
-    }
-    public void setIdade (int idade) {
-        this.idade = idade;
-    } 
-    public int getIdade () {
-        return idade;
-    }
-    public void setFone (String fone) {
-        this.fone = fone;
-    }
-    public String getFone () {
-        return fone;
-    }
     public String toString() {
         return "Nome: " + this.nomePerfil;
     }
@@ -71,8 +43,13 @@ public class Perfil implements Comparable <Perfil> {
         Recado recado = new Recado(msg, autor);
         recados.add(recado);
     }
+<<<<<<< HEAD:Cliente/src/utils/Perfil.java
+    public void enviarRecadoMural(String msg, String autor){
+        Recado recado = new Recado(msg, autor, true);
+=======
     public void enviarRecadoMural(String msg, string autor){
         Recado recado = new Reacado(msg, autor, true);
+>>>>>>> b5b92727f53d555d69cc07ab45d78709579555e7:RedeSocial/src/redesocial/models/Perfil.java
         this.muralPendente.add(recado);
     }
 
@@ -143,5 +120,7 @@ public class Perfil implements Comparable <Perfil> {
             perfil.amigos.add(this);
         }
     }
+
+
     
 }

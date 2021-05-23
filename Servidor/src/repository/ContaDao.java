@@ -1,15 +1,14 @@
-package redesocial.repository;
 
+package repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import redesocial.models.Conta;
-import redesocial.models.Perfil;
+import utils.*;
 
 public class ContaDao {
 
     private static ContaDao contaDao;
-    private List<Conta> contas;
+    private List<ContaAbstrata> contas;
 
     private ContaDao() {
         this.contas = new ArrayList<>();
@@ -22,17 +21,17 @@ public class ContaDao {
         return contaDao;
     }
 
-    public List<Conta> getContas() {
+    public List<ContaAbstrata> getContas() {
         return contas;
     }
 
-    public void cadastrar(Conta conta) {
-        List<Conta> contas = ContaDao.getInstance().getContas();
+    public void cadastrar(ContaAbstrata conta) {
+        List<ContaAbstrata> contas = ContaDao.getInstance().getContas();
         contas.add(conta);
     }
 
-    public Conta buscarLogin(String login) {
-        for(Conta c: contas){
+    public ContaAbstrata buscarLogin(String login) {
+        for(ContaAbstrata c: contas){
             if (c.getLogin().compareTo(login) == 0) {
                 return c;
             }
@@ -40,8 +39,8 @@ public class ContaDao {
         return null;
     }
 
-    public Conta buscarSenha(String senha) {
-        for(Conta c: contas){
+    public ContaAbstrata buscarSenha(String senha) {
+        for(ContaAbstrata c: contas){
             if (c.getSenha().compareTo(senha) == 0) {
                 return c;
             }
@@ -49,11 +48,11 @@ public class ContaDao {
         return null;
     }
 
-    public List<Conta> listarUsuarios() {
+    public List<ContaAbstrata> listarUsuarios() {
         return contas;
     }
     
-    public void removerConta(Conta c){
+    public void removerConta(ContaAbstrata c){
         this.contas.remove(c);
     }
     
