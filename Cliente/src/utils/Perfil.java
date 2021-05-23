@@ -43,8 +43,13 @@ public class Perfil implements Comparable <Perfil>, Serializable {
         Recado recado = new Recado(msg, autor);
         recados.add(recado);
     }
+<<<<<<< HEAD:Cliente/src/utils/Perfil.java
     public void enviarRecadoMural(String msg, String autor){
         Recado recado = new Recado(msg, autor, true);
+=======
+    public void enviarRecadoMural(String msg, string autor){
+        Recado recado = new Reacado(msg, autor, true);
+>>>>>>> b5b92727f53d555d69cc07ab45d78709579555e7:RedeSocial/src/redesocial/models/Perfil.java
         this.muralPendente.add(recado);
     }
 
