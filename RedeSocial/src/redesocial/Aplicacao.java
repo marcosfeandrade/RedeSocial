@@ -183,17 +183,33 @@ public class Aplicacao {
                     System.out.print("Digite o login do usuário que você deseja dar um match:");
                     String logU = in.next();
                     Conta m = ContaDao.getInstance().buscarLogin(logU);
-                    if(m == null) {
-                        System.out.println("Login não encontrado!");
-                    }
-                    else {
+                    boolean deuMatch = true;
+
+                    try {
                         m.getPerfil().addMatch(perfil);
                     }
-                    boolean deuMatch;
-                    deuMatch = m.getPerfil().verificaMatch(perfil);
-                    if(deuMatch == true) {
-                        System.out.println("MATCH com "+m.getPerfil());
+                    catch (Exception e) {
+                        System.out.println("Login Inválido.");
+                        e.getMessage();
                     }
+                    Thread innerThread = new Thread (new Runnable(){
+                        @Override
+                        public void run () {
+                            deuMatch = m.getPerfil().verificaMatch(perfil);
+                            if (deuMatch) {
+                                System.out.println("MATCH com "+m.getPerfil());
+                            }
+                            else {
+                                break;//não imprimir nenhuma menssagem
+                            }
+                        }
+                    });
+                   try {
+                    innerThread.start();
+                   }
+                   catch (Exception e) {
+                    e.printStackTrace();
+                   }
                     break;
                 case 10:
                     sair = true;
