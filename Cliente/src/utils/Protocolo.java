@@ -6,30 +6,30 @@
 package utils;
 import java.io.Serializable;
 
-public class Protocolo implements Serializable {
+public class Protocolo <T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private ContaAbstrata obj;
+    private T obj;
     private String url;
     private StatusCodigo statusCodigo;
 
-    public Protocolo(ContaAbstrata obj, String url, StatusCodigo statusCodigo) {
+    public Protocolo(T obj, String url, StatusCodigo statusCodigo) {
         this.obj = obj;
         this.url = url;
         this.statusCodigo = statusCodigo;
     }
     
-    public Protocolo(ContaAbstrata obj, String url) {
+    public Protocolo(T obj, String url) {
         this.obj = obj;
         this.url = url;
     }
 
-    public ContaAbstrata getObj() {
+    public T getObj() {
         return obj;
     }
 
-    public void setObj(ContaAbstrata obj) {
+    public void setObj(T obj) {
         this.obj = obj;
     }
 

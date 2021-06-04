@@ -76,6 +76,10 @@ public class Perfil implements Comparable<Perfil>, Serializable {
         return this.muralPendente;
     }
 
+    public ArrayList<Perfil> getAmigos() {
+        return amigos;
+    }
+
     public void addConvite(Perfil solicitante) {
         this.convites.add(solicitante);
     }

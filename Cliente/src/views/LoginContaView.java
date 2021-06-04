@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package views;
 
 import java.io.IOException;
@@ -37,17 +33,15 @@ public class LoginContaView {
         }
         ConexaoUtils.getInstance().enviar(new Protocolo(conta, "conta/logar"));
         Protocolo p = ConexaoUtils.getInstance().receber();
-        if(p == null){
-            System.out.println(StatusCodigo.INTERNAL_SERVER_ERRROR.
-                    enumToString());
+        if (p == null) {
+            System.out.println(StatusCodigo.INTERNAL_SERVER_ERRROR);
+        } else if (p.getStatusCodigo().equals(StatusCodigo.UNAUTHORIZED)
+                || !(p.getObj() instanceof ContaAbstrata)) {
+            System.out.println(p.getStatusCodigo().enumToString());
         } else {
-            if(p.getStatusCodigo().equals(StatusCodigo.UNAUTHORIZED)){
-                System.out.println(StatusCodigo.UNAUTHORIZED.enumToString());
-            } else {
-                System.out.println("Login successfully");
-                //conta.MenuLogadoView(conta);
-            }
+            ContaAbstrata contaLogada = (ContaAbstrata) p.getObj();
+            System.out.println("Login successfully");
+            new MenuLogadoView(contaLogada).menuLogado();
         }
     }
-
 }

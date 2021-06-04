@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package utils;
 
 import java.io.IOException;
@@ -19,7 +15,7 @@ public class ConexaoUtils {
     private static ConexaoUtils conexaoUtils;
 
     private ConexaoUtils() throws IOException {
-        this.s = new Socket("localhost", 888);
+        this.s = new Socket("localhost", 5555);
         out = new ObjectOutputStream(this.s.getOutputStream());
         in = new ObjectInputStream(this.s.getInputStream());
 

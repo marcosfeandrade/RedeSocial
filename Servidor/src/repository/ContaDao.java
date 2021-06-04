@@ -21,7 +21,7 @@ public class ContaDao {
         return contaDao;
     }
 
-    public List<ContaAbstrata> getContas() {
+   public List<ContaAbstrata> getContas() {
         return contas;
     }
 
@@ -46,10 +46,6 @@ public class ContaDao {
             }
         }
         return null;
-    }
-
-    public List<ContaAbstrata> listarUsuarios() {
-        return contas;
     }
     
     public void removerConta(ContaAbstrata c){
