@@ -11,7 +11,7 @@ import java.net.Socket;
 
 /**
  *
- * @author Marcos
+ * @author Marcos\
  */
 public class Conexao implements Runnable {
 
@@ -53,8 +53,111 @@ public class Conexao implements Runnable {
             } else {
                 ContaController.getInstance().logar(conexaoUtils, (ContaAbstrata) p.getObj());
             }
-        } else if(p.getUrl().equals("conta/adicionarAmigos")){
-            
+        } else if (p.getUrl().equals("conta/adicionarAmigos")) {
+            if (!(p.getObj() instanceof StringsDTO)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().adicionarAmigos(conexaoUtils,
+                        (StringsDTO) p.getObj());
+            }
+        } else if (p.getUrl().equals("conta/aceitarSolicitacaoAmigo")) {
+            if (!(p.getObj() instanceof StringsDTO)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().aceitarSolicitacaoAmizade(conexaoUtils,
+                        (StringsDTO) p.getObj());
+            }
+        } else if (p.getUrl().equals("conta/getConvites")) {
+            if (!(p.getObj() instanceof String)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().getConvites(conexaoUtils,
+                        (String) p.getObj());
+            }
+        } else if (p.getUrl().equals("conta/listarRecados")) {
+            if (!(p.getObj() instanceof ContaAbstrata)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().listarRecados(conexaoUtils,
+                        (ContaAbstrata) p.getObj());
+            }
+        } else if (p.getUrl().equals("conta/enviarRecado")) {
+            if (!(p.getObj() instanceof String)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().enviarRecado(conexaoUtils,
+                        (EnvioRecado) p.getObj());
+            }
+        }  else if (p.getUrl().equals("conta/verificarAmigo")){
+            if (!(p.getObj() instanceof StringsDTO)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().verificarAmigo(conexaoUtils,
+                        (StringsDTO) p.getObj());
+            }
+        } else if (p.getUrl().equals("conta/aceitarRecadoMural")){
+            if(!(p.getObj() instanceof RecadoMural)){
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().
+                        aceitarRecadosMural(conexaoUtils,
+                                (RecadoMural) p.getObj());
+            }
+        } else if (p.getUrl().equals("conta/adicionarMatch")) {
+            if (!(p.getObj() instanceof StringsDTO)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().adicionarMatch(conexaoUtils,
+                        (StringsDTO) p.getObj());
+            }
+        } else if(p.getUrl().equals("conta/desativarConta")){
+            if (!(p.getObj() instanceof StringsDTO)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().desativarConta(conexaoUtils,
+                        (StringsDTO) p.getObj());
+            }
+        } else if(p.getUrl().equals("conta/editarSenha")){
+            if (!(p.getObj() instanceof StringsDTO)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().desativarConta(conexaoUtils,
+                        (StringsDTO) p.getObj());
+            }
+        } else if(p.getUrl().equals("conta/editarUsuario")){
+            if (!(p.getObj() instanceof StringsDTO)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().desativarConta(conexaoUtils,
+                        (StringsDTO) p.getObj());
+            }
+        } else if(p.getUrl().equals("conta/reativarConta")){
+            if (!(p.getObj() instanceof StringsDTO)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().desativarConta(conexaoUtils,
+                        (StringsDTO) p.getObj());
+            }
+        } else if(p.getUrl().equals("conta/verOutroMural")){
+            if (!(p.getObj() instanceof StringsDTO)) {
+                conexaoUtils.enviar(new Protocolo(null,
+                        null, StatusCodigo.BAD_REQUEST));
+            } else {
+                ContaController.getInstance().desativarConta(conexaoUtils,
+                        (StringsDTO) p.getObj());
+            }
         }
     }
 
@@ -74,9 +177,9 @@ public class Conexao implements Runnable {
             while (true) {
                 validarRequisicao();
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             conexaoUtils.fecharConexao();
-        } catch(ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             conexaoUtils.fecharConexao();
         }
     }

@@ -52,6 +52,16 @@ public enum StatusCodigo {
        public String enumToString(){
            return "FORBIDDEN";
        } 
+   },
+   NOT_ACCEPTABLE{
+       public String enumToString(){
+           return "NOT_ACCEPTABLE";
+       }
+   },
+   UNSUPPORTED_MEDIA_TYPE{
+       public String enumToString(){
+           return "UNSUPPORTED_MEDIA_TYPE";
+       }
    };
    public abstract String enumToString();
 }
