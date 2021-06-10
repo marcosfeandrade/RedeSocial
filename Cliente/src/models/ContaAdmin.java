@@ -1,5 +1,5 @@
 
-package utils;
+package models;
 
 import java.io.Serializable;
 
@@ -9,6 +9,7 @@ public class ContaAdmin extends ContaAbstrata implements Serializable {
             Perfil perfil) {
         super(login, senha, nomeUsuario, perfil);
     }
+    
     public ContaAdmin(String login, String senha, String nomeUsuario) {
         super(login, senha, nomeUsuario);
     }

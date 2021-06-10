@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views;
 
-import java.io.IOException;
+import models.ContaAbstrata;
+import models.ContaUsuario;
+import models.Perfil;
+import models.ContaAdmin;
 import java.util.Scanner;
-import utils.*;
-import utils.ConexaoUtils;
-import utils.Protocolo;
+import models.ConexaoUtils;
+import models.Protocolo;
 
 public class CadastroContaView {
 
@@ -41,26 +38,18 @@ public class CadastroContaView {
         }
         Perfil perfil = new Perfil(nomeUsuario);
         if (tipoConta == 1) {
-            conta = new ContaUsuario(login, Senha, nomeUsuario, perfil);
+            conta = new ContaUsuario(login, Senha, nomeUsuario);
         } else {
-            conta = new ContaAdmin(login, Senha, nomeUsuario, perfil);
+            conta = new ContaAdmin(login, Senha, nomeUsuario);
         }
-        try {
-            ConexaoUtils.getInstance().enviar(new Protocolo(conta,
-                    "conta/cadastrar"));
-            Protocolo p = ConexaoUtils.getInstance().receber();
-            if (p == null) {
-                System.out.println("Erro na comunicação.");
-            } else {
-                System.out.println("Cadastro com "
-                        + p.getStatusCodigo().toString());
-            }
-        } catch (IOException e) {
-            System.out.println("Erro de conexão.");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Aconteceu um erro");
-        } finally {
-            System.out.println("Voltando para pagina inicial.");
+        Protocolo p = ConexaoUtils.getInstance().enviarReceber
+        (conta, "conta/cadastrar");
+        if (p == null) {
+            System.out.println("Erro na comunicação.");
+        } else {
+            System.out.println("Cadastro com "
+                    + p.getStatusCodigo().toString());
         }
+        System.out.println("Voltando para pagina inicial.");
     }
 }

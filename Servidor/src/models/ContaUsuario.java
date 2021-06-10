@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package models;
 import java.io.Serializable;
 
 public class ContaUsuario extends ContaAbstrata implements Serializable {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -23,6 +23,7 @@ public class Perfil implements Comparable <Perfil>, Serializable {
         this.convites = new ArrayList<Perfil>();
         this.amigos = new ArrayList<Perfil>();
         this.matchs = new ArrayList<Perfil>();
+        this.muralPendente = new ArrayList<>();
     }
     //metodos set e get
     public void setNome (String nomePerfil) {
