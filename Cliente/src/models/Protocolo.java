@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package utils;
 
+package models;
 import java.io.Serializable;
 
 public class Protocolo <T> implements Serializable {
@@ -20,7 +15,7 @@ public class Protocolo <T> implements Serializable {
         this.url = url;
         this.statusCodigo = statusCodigo;
     }
-
+    
     public Protocolo(T obj, String url) {
         this.obj = obj;
         this.url = url;
@@ -49,6 +44,5 @@ public class Protocolo <T> implements Serializable {
     public void setStatusCodigo(StatusCodigo statusCodigo) {
         this.statusCodigo = statusCodigo;
     }
-
+    
 }
-

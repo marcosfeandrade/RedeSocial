@@ -1,17 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
+import models.Perfil;
+import models.EnvioRecado;
+import models.ContaAdmin;
+import models.StringsDTO;
+import models.ContaAbstrata;
+import models.Recado;
+import models.RecadoMural;
 import java.io.IOException;
 import java.util.ArrayList;
-import utils.*;
 import repository.ContaDao;
-import utils.ConexaoUtils;
-import utils.Protocolo;
-import utils.StatusCodigo;
+import models.ConexaoUtils;
+import models.Protocolo;
+import models.StatusCodigo;
 
 public class ContaController {
 
@@ -80,9 +81,10 @@ public class ContaController {
                 if (p.getNome().equals(stringsDTO.getS2())) {
                     cAbstrata.getPerfil().aceitarConvite(p);
                     conexaoUtils.enviar(new Protocolo(null, null, StatusCodigo.OK));
-
+                    return;
                 }
             }
+            conexaoUtils.enviar(new Protocolo(null, null, StatusCodigo.NOT_FOUND));
         }
     }
 
@@ -103,7 +105,7 @@ public class ContaController {
         }
     }
 
-    public void listarRecados(ConexaoUtils conexaoUtils, ContaAbstrata conta)
+    public void getRecados(ConexaoUtils conexaoUtils, ContaAbstrata conta)
             throws IOException {
         ContaDao cd = ContaDao.getInstance();
         ContaAbstrata cAbstrata = cd.buscarLogin(conta.getLogin());
@@ -111,8 +113,12 @@ public class ContaController {
             conexaoUtils.enviar(new Protocolo(null,
                     null, StatusCodigo.NOT_FOUND));
         } else {
-            ArrayList<Recado> recados = cAbstrata.getPerfil().getRecados();
-            for (Recado convite : recados) {
+            for (Recado convite : cAbstrata.getPerfil().getRecados()) {
+                conexaoUtils.enviar(new Protocolo(convite,
+                        null, StatusCodigo.OK));
+            }
+
+            for (Recado convite : cAbstrata.getPerfil().getMural()) {
                 conexaoUtils.enviar(new Protocolo(convite,
                         null, StatusCodigo.OK));
             }
@@ -173,7 +179,7 @@ public class ContaController {
             if (!recadoMural.isTodos()) {
                 conta.getPerfil().aceitarMural(recadoMural.getPosicao());
             } else {
-                for (int i = 0; i < conta.getPerfil().getRecados().size(); i++) {
+                for (int i = 0; i < conta.getPerfil().getMural().size(); i++) {
                     conta.getPerfil().aceitarMural(i);
                 }
             }
@@ -209,11 +215,12 @@ public class ContaController {
         }
     }
 
-    public void editarSenha(ConexaoUtils conexaoUtils, StringsDTO stringsDTO,
-            String novaSenha) throws IOException {
+    public void editarSenha(ConexaoUtils conexaoUtils, StringsDTO stringsDTO)
+            throws IOException {
         ContaAbstrata c = ContaDao.getInstance().buscarLogin(stringsDTO.getS1());
         ContaAbstrata cEditada = ContaDao.getInstance()
                 .buscarLogin(stringsDTO.getS2());
+        String novaSenha = stringsDTO.getS3();
         if (c == null || !(c instanceof ContaAdmin)) {
             conexaoUtils.enviar(new Protocolo(null, null,
                     StatusCodigo.NOT_FOUND));
@@ -223,11 +230,12 @@ public class ContaController {
         }
     }
 
-    public void editarUsuario(ConexaoUtils conexaoUtils, StringsDTO stringsDTO,
-            String novoUsuario) throws IOException {
+    public void editarUsuario(ConexaoUtils conexaoUtils, StringsDTO stringsDTO)
+            throws IOException {
         ContaAbstrata c = ContaDao.getInstance().buscarLogin(stringsDTO.getS1());
         ContaAbstrata cEditada = ContaDao.getInstance()
                 .buscarLogin(stringsDTO.getS2());
+        String novoUsuario = stringsDTO.getS3();
         if (c == null || !(c instanceof ContaAdmin)) {
             conexaoUtils.enviar(new Protocolo(null, null,
                     StatusCodigo.NOT_FOUND));
@@ -250,4 +258,34 @@ public class ContaController {
             conexaoUtils.enviar(new Protocolo(null, null, StatusCodigo.OK));
         }
     }
+
+    public void getMural(ConexaoUtils conexaoUtils, String login)
+            throws IOException {
+        ContaAbstrata c = ContaDao.getInstance().buscarLogin(login);
+        if (c == null) {
+            conexaoUtils.enviar(new Protocolo(null, null,
+                    StatusCodigo.NOT_FOUND));
+        } else {
+            for (int i = 0; i < c.getPerfil().getMural().size(); i++) {
+                conexaoUtils.enviar(new Protocolo(null, null, StatusCodigo.OK));
+            }
+            conexaoUtils.enviar(new Protocolo(new Integer(-1), null, StatusCodigo.OK));
+        }
+    }
+    
+    public void buscarLogin(ConexaoUtils conexaoUtils, String login) throws IOException{
+        ContaAbstrata c = ContaDao.getInstance().buscarLogin(login);
+        if (c == null) {
+            conexaoUtils.enviar(new Protocolo(null, null,
+                    StatusCodigo.NOT_FOUND));
+        } else {
+            conexaoUtils.enviar(new Protocolo(new Integer(-1), null, StatusCodigo.OK));
+        }
+    }
+    
+    /*public void getAlgumaCoisa(ConexaoUtils conexaoUtils) throws IOException{
+        ArrayList<Perfil> p = new ArrayList<>();
+        p.add(new Perfil("abc"));
+        conexaoUtils.enviar(new Protocolo(p, null));
+   }*/
 }

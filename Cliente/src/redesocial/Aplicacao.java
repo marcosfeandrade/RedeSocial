@@ -1,6 +1,6 @@
 
 package redesocial;
-import utils.ConexaoUtils;
+import models.ConexaoUtils;
 import views.ViewInicial;
 
 public class Aplicacao {

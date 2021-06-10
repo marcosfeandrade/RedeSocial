@@ -1,18 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package utils;
+
+package models;
 
 import controllers.ContaController;
 import java.io.IOException;
 import java.net.Socket;
 
-/**
- *
- * @author Marcos\
- */
 public class Conexao implements Runnable {
 
     private ConexaoUtils conexaoUtils;
@@ -77,16 +69,16 @@ public class Conexao implements Runnable {
                 ContaController.getInstance().getConvites(conexaoUtils,
                         (String) p.getObj());
             }
-        } else if (p.getUrl().equals("conta/listarRecados")) {
+        } else if (p.getUrl().equals("conta/getRecados")) {
             if (!(p.getObj() instanceof ContaAbstrata)) {
                 conexaoUtils.enviar(new Protocolo(null,
                         null, StatusCodigo.BAD_REQUEST));
             } else {
-                ContaController.getInstance().listarRecados(conexaoUtils,
+                ContaController.getInstance().getRecados(conexaoUtils,
                         (ContaAbstrata) p.getObj());
             }
         } else if (p.getUrl().equals("conta/enviarRecado")) {
-            if (!(p.getObj() instanceof String)) {
+            if (!(p.getObj() instanceof EnvioRecado)) {
                 conexaoUtils.enviar(new Protocolo(null,
                         null, StatusCodigo.BAD_REQUEST));
             } else {
@@ -131,7 +123,7 @@ public class Conexao implements Runnable {
                 conexaoUtils.enviar(new Protocolo(null,
                         null, StatusCodigo.BAD_REQUEST));
             } else {
-                ContaController.getInstance().desativarConta(conexaoUtils,
+                ContaController.getInstance().editarSenha(conexaoUtils,
                         (StringsDTO) p.getObj());
             }
         } else if(p.getUrl().equals("conta/editarUsuario")){
@@ -139,7 +131,7 @@ public class Conexao implements Runnable {
                 conexaoUtils.enviar(new Protocolo(null,
                         null, StatusCodigo.BAD_REQUEST));
             } else {
-                ContaController.getInstance().desativarConta(conexaoUtils,
+                ContaController.getInstance().editarUsuario(conexaoUtils,
                         (StringsDTO) p.getObj());
             }
         } else if(p.getUrl().equals("conta/reativarConta")){
@@ -147,18 +139,20 @@ public class Conexao implements Runnable {
                 conexaoUtils.enviar(new Protocolo(null,
                         null, StatusCodigo.BAD_REQUEST));
             } else {
-                ContaController.getInstance().desativarConta(conexaoUtils,
+                ContaController.getInstance().reativarConta(conexaoUtils,
                         (StringsDTO) p.getObj());
             }
         } else if(p.getUrl().equals("conta/verOutroMural")){
-            if (!(p.getObj() instanceof StringsDTO)) {
+            if (!(p.getObj() instanceof String)) {
                 conexaoUtils.enviar(new Protocolo(null,
                         null, StatusCodigo.BAD_REQUEST));
             } else {
-                ContaController.getInstance().desativarConta(conexaoUtils,
-                        (StringsDTO) p.getObj());
+                ContaController.getInstance().getMural(conexaoUtils,
+                        (String) p.getObj());
             }
-        }
+        } /*else if(p.getUrl().equals("conta/getAlgumaCoisa")){
+                ContaController.getInstance().getAlgumaCoisa(conexaoUtils);
+        }*/
     }
 
     private boolean isObjectNull(Protocolo p) throws IOException {

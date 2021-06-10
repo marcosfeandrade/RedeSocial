@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package utils;
+
+package models;
 import java.io.Serializable;
 
 public class Recado implements Serializable {
@@ -43,7 +39,7 @@ public class Recado implements Serializable {
     }
 
     public String getMensagem(String senha){
-        if(this.senha == senha) {
+        if(this.senha.equals(senha)) {
             return this.mensagem;
         } else {
             return "";
@@ -62,8 +58,8 @@ public class Recado implements Serializable {
         return this.secreta;
     }
 
-    public boolean abrirMensagemSecreta(String senha) {
-        return (this.senha == senha);
+    public boolean ehMensagemSecreta(String senha) {
+        return (this.senha.equals(senha));
     }
 
     public boolean exibirNoMural(){

@@ -1,9 +1,8 @@
-
 package repository;
 
+import models.ContaAbstrata;
 import java.util.ArrayList;
 import java.util.List;
-import utils.*;
 
 public class ContaDao {
 
@@ -21,7 +20,7 @@ public class ContaDao {
         return contaDao;
     }
 
-   public List<ContaAbstrata> getContas() {
+    public List<ContaAbstrata> getContas() {
         return contas;
     }
 
@@ -31,7 +30,7 @@ public class ContaDao {
     }
 
     public ContaAbstrata buscarLogin(String login) {
-        for(ContaAbstrata c: contas){
+        for (ContaAbstrata c : contas) {
             if (c.getLogin().compareTo(login) == 0) {
                 return c;
             }
@@ -40,19 +39,19 @@ public class ContaDao {
     }
 
     public ContaAbstrata buscarSenha(String senha) {
-        for(ContaAbstrata c: contas){
+        for (ContaAbstrata c : contas) {
             if (c.getSenha().compareTo(senha) == 0) {
                 return c;
             }
         }
         return null;
     }
-    
-    public void removerConta(ContaAbstrata c){
+
+    public void removerConta(ContaAbstrata c) {
         this.contas.remove(c);
     }
-    
-   public int count(){
-       return contas.size();
-   } 
+
+    public int count() {
+        return contas.size();
+    }
 }

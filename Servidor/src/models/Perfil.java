@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ public class Perfil implements Comparable<Perfil>, Serializable {
     //atributos
     private String nomePerfil;
     private ArrayList<Recado> recados;
-    private ArrayList<Recado> muralPendente;
+    private ArrayList<Recado> mural;
     private ArrayList<Perfil> convites;
     private ArrayList<Perfil> amigos;
     private ArrayList<Perfil> matchs;
@@ -23,6 +23,7 @@ public class Perfil implements Comparable<Perfil>, Serializable {
         this.convites = new ArrayList<>();
         this.amigos = new ArrayList<>();
         this.matchs = new ArrayList<>();
+        this.mural = new ArrayList<>();
     }
 
     //metodos set e get
@@ -51,15 +52,15 @@ public class Perfil implements Comparable<Perfil>, Serializable {
 
     public void enviarRecadoMural(String msg, String autor) {
         Recado recado = new Recado(msg, autor, true);
-        this.muralPendente.add(recado);
+        this.mural.add(recado);
     }
 
-    public ArrayList<Recado> getMuralPendente() {
-        return this.muralPendente;
+    public ArrayList<Recado> getMural() {
+        return this.mural;
     }
 
     public void aceitarMural(int i) {
-        Recado recado = this.muralPendente.get(i);
+        Recado recado = this.mural.get(i);
         this.recados.add(recado);
     }
 
@@ -70,10 +71,6 @@ public class Perfil implements Comparable<Perfil>, Serializable {
 
     public ArrayList<Recado> getRecados() {
         return this.recados;
-    }
-
-    public ArrayList<Recado> getRecadosMuralParaAceitar() {
-        return this.muralPendente;
     }
 
     public ArrayList<Perfil> getAmigos() {

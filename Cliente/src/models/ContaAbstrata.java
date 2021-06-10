@@ -1,5 +1,5 @@
 
-package utils;
+package models;
 import java.io.Serializable;
 
 public abstract class ContaAbstrata implements Comparable<ContaAbstrata>, Serializable {

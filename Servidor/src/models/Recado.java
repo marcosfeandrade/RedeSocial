@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package utils;
+package models;
 import java.io.Serializable;
 
 public class Recado implements Serializable {
@@ -54,10 +54,6 @@ public class Recado implements Serializable {
         return this.autor;
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         return "Mensagem: " + this.mensagem + "Enviada por: " + this.autor;
